@@ -11,6 +11,8 @@ gem 'bundle-audit'
 gem 'cssbundling-rails'
 gem 'jbuilder'
 gem 'jsbundling-rails'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 gem 'pagy', '~> 8.6'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.1', '>= 7.1.3.4'
@@ -33,6 +35,7 @@ end
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'dotenv-rails'
   gem 'faker'
   gem 'sqlite3', '~> 1.4'
 end
