@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title
+      | Obyavlyay
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    = favicon_link_tag
+    style
+      |  .custom-background { background-color: #faefde; } .custom-navbar { background-color: #2b1874; } 
+  body.custom-background
+    nav.navbar.navbar-expand-lg.navbar-dark.custom-navbar
+      .container
+        a.navbar-brand[href="#"]
+          | Start Bootstrap
+        button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+
+      ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+        - if current_user
+          li.nav-link.active
+            = current_user.email
+          li.nav-link
+            = link_to 'Logout', destroy_session_path, data: { turbo_method: :delete }
+        - else
+          li.nav-link.active
+          = button_to "Sign in with Github", auth_request_path(:github), data: { turbo: false }
+
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+            | Dropdown
+      ul.dropdown-menu.dropdown-menu-end[aria-labelledby="navbarDropdown"]
+        li
+          a.dropdown-item[href="#"]
+            | Action
+        li
+          a.dropdown-item[href="#"]
+            | Another action
+        li
+          hr.dropdown-divider
+        li
+          a.dropdown-item[href="#"]
+            | Something else here
+    .container
+      = yield
