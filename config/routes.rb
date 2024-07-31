@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root 'home#index'
     resources :categories
     resources :users
+    resources :bulletins
   end
   
   scope module: :web do
