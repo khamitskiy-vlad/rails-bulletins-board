@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :bulletins, dependent: :destroy
+
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
 
   def self.from_omniauth(omniauth_params)
