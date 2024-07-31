@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Web::BulletinsController < Web::ApplicationController
-  before_action :set_bulletin, only: %i[ show edit update destroy ]
+  before_action :set_bulletin, only: %i[show edit update destroy]
 
   # GET /bulletins or /bulletins.json
   def index
@@ -7,8 +9,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   # GET /bulletins/1 or /bulletins/1.json
-  def show
-  end
+  def show; end
 
   # GET /bulletins/new
   def new
@@ -16,8 +17,7 @@ class Web::BulletinsController < Web::ApplicationController
   end
 
   # GET /bulletins/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bulletins or /bulletins.json
   def create
@@ -25,7 +25,7 @@ class Web::BulletinsController < Web::ApplicationController
 
     respond_to do |format|
       if @bulletin.save
-        format.html { redirect_to bulletin_url(@bulletin), notice: "Bulletin was successfully created." }
+        format.html { redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully created.' }
         format.json { render :show, status: :created, location: @bulletin }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Web::BulletinsController < Web::ApplicationController
   def update
     respond_to do |format|
       if @bulletin.update(bulletin_params)
-        format.html { redirect_to bulletin_url(@bulletin), notice: "Bulletin was successfully updated." }
+        format.html { redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully updated.' }
         format.json { render :show, status: :ok, location: @bulletin }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,20 @@ class Web::BulletinsController < Web::ApplicationController
     @bulletin.destroy!
 
     respond_to do |format|
-      format.html { redirect_to bulletins_url, notice: "Bulletin was successfully destroyed." }
+      format.html { redirect_to bulletins_url, notice: 'Bulletin was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bulletin
-      @bulletin = Bulletin.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bulletin_params
-      params.require(:bulletin).permit(:title, :description, :user_id, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bulletin
+    @bulletin = Bulletin.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bulletin_params
+    params.require(:bulletin).permit(:title, :description, :user_id, :category_id)
+  end
 end
