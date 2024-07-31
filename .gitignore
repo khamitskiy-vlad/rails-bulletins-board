@@ -1,6 +1,6 @@
 /.bundle
 
-/.env*
+/.env
 !/.env*.erb
 
 /log/*
