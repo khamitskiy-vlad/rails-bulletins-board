@@ -14,8 +14,8 @@ html
   body.custom-background
     nav.navbar.navbar-expand-lg.navbar-dark.custom-navbar
       .container
-        a.navbar-brand[href='#']
-          | Start Bootstrap
+        a.navbar-brand[href='/']
+          | Объявляй
       #navbarSupportedContent.collapse.navbar-collapse
 
       ul.navbar-nav.ms-auto.mb-2.mb-lg-0
@@ -27,21 +27,5 @@ html
         - else
           li.nav-link.active
           = button_to 'Sign in with Github', auth_request_path(:github), data: { turbo: false }
-
-        li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle[href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false']
-            | Dropdown
-      ul.dropdown-menu.dropdown-menu-end[aria-labelledby='navbarDropdown']
-        li
-          a.dropdown-item[href='#']
-            | Action
-        li
-          a.dropdown-item[href='#']
-            | Another action
-        li
-          hr.dropdown-divider
-        li
-          a.dropdown-item[href='#']
-            | Something else here
     .container
       = yield

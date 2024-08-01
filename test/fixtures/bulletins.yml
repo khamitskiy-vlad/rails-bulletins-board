@@ -3,11 +3,11 @@
 one:
   title: MyString
   description: MyText
-  user: one
+  creator: one
   category: one
 
 two:
   title: MyString
   description: MyText
-  user: two
+  creator: two
   category: two

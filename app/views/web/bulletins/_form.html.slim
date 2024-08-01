@@ -5,8 +5,8 @@
   .form-inputs
     = f.input :title
     = f.input :description
-    = f.association :user
     = f.association :category
+    = f.input :image, as: :file, required: true
 
   .form-actions
     = f.button :submit
