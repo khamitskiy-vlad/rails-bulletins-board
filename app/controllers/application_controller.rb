@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include Pundit
-  
+  include Pundit::Authorization
+
   after_action :verify_authorized
   protect_from_forgery with: :exception
   helper_method :current_user
@@ -10,10 +10,11 @@ class ApplicationController < ActionController::Base
   rescue_from(
     Pundit::NotAuthorizedError,
     Pundit::AuthorizationNotPerformedError,
-    with: :user_not_authorized)
-  
+    with: :user_not_authorized
+  )
+
   private
-  
+
   def authenticate_user!
     redirect_to root_path, alert: 'Requires authentication' unless user_signed_in?
   end
