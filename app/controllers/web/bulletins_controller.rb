@@ -44,7 +44,7 @@ class Web::BulletinsController < Web::ApplicationController
     @bulletin = set_bulletin
     authorize @bulletin
 
-    if user_verified? 
+    if user_verified?
       @bulletin.update(bulletin_params)
       redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully updated.'
     else
@@ -73,7 +73,7 @@ class Web::BulletinsController < Web::ApplicationController
   def set_bulletin
     Bulletin.find(params[:id])
   end
-  
+
   def set_bulletins
     Bulletin.ransack(params[:search_query])
   end

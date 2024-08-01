@@ -7,5 +7,5 @@ div
     => link_to 'Edit this bulletin', edit_bulletin_path(@bulletin)
   - if policy(@bulletin).destroy?
     =< button_to 'Destroy this bulletin', @bulletin, method: :delete
-  
+
   = link_to 'Back to bulletins', bulletins_path

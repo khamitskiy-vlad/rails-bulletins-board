@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BulletinPolicy < ApplicationPolicy
   attr_reader :user, :bulletin
 
@@ -5,7 +7,7 @@ class BulletinPolicy < ApplicationPolicy
     @user = user
     @bulletin = bulletin
   end
-  
+
   def index?
     true
   end
