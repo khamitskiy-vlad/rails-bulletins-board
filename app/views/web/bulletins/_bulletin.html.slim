@@ -1,4 +1,5 @@
 div id='#{dom_id bulletin}'
+  =< image_tag(rails_blob_path(bulletin.image), size: 200, class: 'img-thumbnail')
   p
     strong Title:
     =< bulletin.title
@@ -7,7 +8,7 @@ div id='#{dom_id bulletin}'
     =< bulletin.description
   p
     strong User:
-    =< bulletin.user_id
+    =< bulletin.creator.name
   p
     strong Category:
-    =< bulletin.category_id
+    =< bulletin.category.name

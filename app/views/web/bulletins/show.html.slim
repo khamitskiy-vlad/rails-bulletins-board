@@ -3,8 +3,9 @@ p style='color: green' = notice
 == render @bulletin
 
 div
-  => link_to 'Edit this bulletin', edit_bulletin_path(@bulletin)
-  '|
-  =< link_to 'Back to bulletins', bulletins_path
-
-  = button_to 'Destroy this bulletin', @bulletin, method: :delete
+  - if current_user == @creator
+    => link_to 'Edit this bulletin', edit_bulletin_path(@bulletin)
+    '|
+    =< button_to 'Destroy this bulletin', @bulletin, method: :delete
+  
+  = link_to 'Back to bulletins', bulletins_path

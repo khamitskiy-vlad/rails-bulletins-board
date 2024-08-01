@@ -1,71 +1,76 @@
 # frozen_string_literal: true
 
 class Web::BulletinsController < Web::ApplicationController
-  before_action :set_bulletin, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new edit create update destroy]
+  include Pagy::Backend
 
-  # GET /bulletins or /bulletins.json
   def index
-    @bulletins = Bulletin.all
+    @search_query = set_bulletins
+    @pagy, @bulletins = pagy(@search_query.result
+                                          .order(created_at: :desc)
+                                          .includes(:creator, :category))
   end
 
-  # GET /bulletins/1 or /bulletins/1.json
-  def show; end
+  def show
+    @bulletin = set_bulletin
+    @creator = @bulletin.creator
+  end
 
-  # GET /bulletins/new
   def new
     @bulletin = Bulletin.new
   end
 
-  # GET /bulletins/1/edit
-  def edit; end
+  def edit
+    @bulletin = set_bulletin
+  end
 
-  # POST /bulletins or /bulletins.json
   def create
-    @bulletin = Bulletin.new(bulletin_params)
+    @bulletin = current_user.bulletins.build(bulletin_params)
 
-    respond_to do |format|
-      if @bulletin.save
-        format.html { redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully created.' }
-        format.json { render :show, status: :created, location: @bulletin }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @bulletin.errors, status: :unprocessable_entity }
-      end
+    if @bulletin.save
+      redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /bulletins/1 or /bulletins/1.json
   def update
-    respond_to do |format|
-      if @bulletin.update(bulletin_params)
-        format.html { redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bulletin }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @bulletin.errors, status: :unprocessable_entity }
-      end
+    @bulletin = set_bulletin
+
+    if user_verified? 
+      @bulletin.update(bulletin_params)
+      redirect_to bulletin_url(@bulletin), notice: 'Bulletin was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /bulletins/1 or /bulletins/1.json
   def destroy
-    @bulletin.destroy!
+    @bulletin = set_bulletin
 
-    respond_to do |format|
-      format.html { redirect_to bulletins_url, notice: 'Bulletin was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_verified?
+      @bulletin.destroy!
+      redirect_to bulletins_url, notice: 'Bulletin was successfully destroyed.'
+    else
+      redirect_to bulletine_url(@bulletin), notice: t('.failure')
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def bulletin_params
+    params.require(:bulletin).permit(:title, :description, :category_id, :image)
+  end
+
   def set_bulletin
     @bulletin = Bulletin.find(params[:id])
   end
+  
+  def set_bulletins
+    Bulletin.ransack(params[:search_query])
+  end
 
-  # Only allow a list of trusted parameters through.
-  def bulletin_params
-    params.require(:bulletin).permit(:title, :description, :user_id, :category_id)
+  def user_verified?
+    @bulletin.creator == current_user
   end
 end

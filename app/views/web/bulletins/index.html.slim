@@ -1,11 +1,14 @@
 p style='color: green' = notice
 
 h1 Bulletins
-
+= render 'web/bulletins/search', search_query: @search_query, url: root_path
+- if user_signed_in?
+  = link_to 'New bulletin', new_bulletin_path
 #bulletins
   - @bulletins.each do |bulletin|
-    == render bulletin
-    p
-      = link_to 'Show this bulletin', bulletin
+    .container.rounded-3.mb-3.px-3.py-2.text-break.bg-white
+      == render bulletin
+      p
+        = link_to 'Show this bulletin', bulletin
 
-= link_to 'New bulletin', new_bulletin_path
+== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
