@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   scope module: :web do
-    root 'home#index'
+    root 'bulletins#index'
     resources :categories
     resources :users
     resources :bulletins
