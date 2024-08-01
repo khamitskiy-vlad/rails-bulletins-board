@@ -2,7 +2,7 @@ p style='color: green' = notice
 
 h1 Bulletins
 = render 'web/bulletins/search', search_query: @search_query, url: root_path
-- if user_signed_in?
+- if policy(Bulletin).new?
   = link_to 'New bulletin', new_bulletin_path
 #bulletins
   - @bulletins.each do |bulletin|
