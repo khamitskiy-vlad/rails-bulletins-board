@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'panel/index'
   scope module: :web do
     root 'bulletins#index'
     resources :bulletins
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
 
   scope module: :web do
     namespace :admin do
-      root 'panel#index'
+      root 'dashboard#index'
       resources :bulletins
       resources :categories
       resources :users

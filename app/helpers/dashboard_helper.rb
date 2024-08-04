@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-module PanelHelper
+module DashboardHelper
 end
