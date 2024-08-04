@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_admin!
+    redirect_to root_path, alert: 'Requires authentication' unless current_user&.admin?
+  end
+
   def authenticate_user!
     redirect_to root_path, alert: 'Requires authentication' unless user_signed_in?
   end
