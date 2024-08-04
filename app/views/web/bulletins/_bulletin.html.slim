@@ -1,5 +1,6 @@
 div id='#{dom_id bulletin}'
-  =< image_tag(rails_blob_path(bulletin.image), size: 200, class: 'img-thumbnail')
+  - if bulletin.image.attached?
+    =< image_tag(rails_blob_path(bulletin.image), size: 200, class: 'img-thumbnail')
   p
     strong Title:
     =< bulletin.title
