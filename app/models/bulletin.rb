@@ -2,7 +2,7 @@
 
 class Bulletin < ApplicationRecord
   belongs_to :creator, class_name: 'User', inverse_of: :bulletins, counter_cache: :bulletins_count
-  belongs_to :category
+  belongs_to :category, counter_cache: :bulletins_count
   has_one_attached :image
 
   validates :title, presence: true, length: { maximum: 50 }

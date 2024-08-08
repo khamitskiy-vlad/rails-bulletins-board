@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Web::Admin::Users::BulletinsController < Web::Admin::Users::UsersController
+class Web::Admin::Categories::BulletinsController < Web::Admin::Categories::CategoriesController
   include Pagy::Backend
 
   def index
-    @user = resource_user
-    @bulletins_count = @user.bulletins.size
-    @search_query = @user.bulletins.ransack(params[:search_query])
+    @category = resource_category
+    @bulletins_count = @category.bulletins.size
+    @search_query = @category.bulletins.ransack(params[:search_query])
     @pagy, @bulletins = pagy(@search_query.result
                                           .order(created_at: :desc)
                                           .includes(:creator, :category),

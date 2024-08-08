@@ -8,7 +8,9 @@ table
   thead
     tr
       th= sort_link(@search_query, :name)
+      th= sort_link(@search_query, :created_at, 'Created at')
+      th= sort_link(@search_query, :updated_at, 'Updated at')
   tbody
     - @categories.each do |category|
-      == render 'category', category:
+      == render 'categories', category:
 == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

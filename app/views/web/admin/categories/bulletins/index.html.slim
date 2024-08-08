@@ -1,8 +1,10 @@
-p style="color: green" = notice
+p style='color: green' = notice
 
-h1 Bulletins
-= render 'search', search_query: @search_query, url: admin_bulletins_path
-= link_to "New bulletin", new_admin_bulletin_path
+h1
+  | Bulletins in
+  =<> @category.name
+  | category
+= render 'web/admin/bulletins/search', search_query: @search_query, url: admin_category_bulletins_path
 h2
   | Bulletins count:
   =< @bulletins_count
@@ -17,5 +19,6 @@ table
       th= sort_link(@search_query, :updated_at, 'Updated at')
   tbody
     - @bulletins.each do |bulletin|
-      == render 'bulletins', bulletin:
+      == render 'web/admin/bulletins/bulletins', bulletin:
+= link_to 'Back to category', admin_category_path(@category)
 == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

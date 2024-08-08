@@ -1,4 +1,6 @@
 div id="#{dom_id bulletin}"
+  - if bulletin.image.attached?
+    =< image_tag(rails_blob_path(bulletin.image), size: 200, class: 'img-thumbnail')
   p
     strong Title:
     =< bulletin.title
@@ -11,3 +13,9 @@ div id="#{dom_id bulletin}"
   p
     strong Category:
     =< bulletin.category.name
+  p
+    strong Created at:
+    =< bulletin.created_at.strftime('%d %b %Y %H:%M:%S')
+  p
+    strong Updated at:
+    =< bulletin.updated_at.strftime('%d %b %Y %H:%M:%S')

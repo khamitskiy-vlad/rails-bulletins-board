@@ -5,6 +5,7 @@
   .form-inputs
     = f.input :title
     = f.input :description
+    = f.input :image, as: :file, required: true
     = f.association :category, required: true, label: t('.category'), prompt: t('.select_category'), input_html: { class: 'form-control' }
     = f.association :creator, required: true, label: t('.creator'), prompt: t('.select_creator'), input_html: { class: 'form-control' }
 

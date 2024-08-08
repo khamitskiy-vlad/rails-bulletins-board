@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
-class Web::Admin::CategoriesController < Web::Admin::ApplicationController
+class Web::Admin::Categories::CategoriesController < Web::Admin::Categories::ApplicationController
   include Pagy::Backend
+
+  def show
+    @category = set_category
+    @bulletins = @category.bulletins.includes(:creator, :category)
+  end
 
   def index
     @search_query = set_categories

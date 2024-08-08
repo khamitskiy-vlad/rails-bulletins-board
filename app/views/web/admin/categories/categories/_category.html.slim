@@ -1,0 +1,12 @@
+h1 
+  | Category id:
+  =< category.id
+p
+  strong Name:
+  =< category.name
+p
+  strong Created at:
+  =< category.created_at.strftime('%d %b %Y %H:%M:%S')
+p
+  strong Updated at:
+  =< category.updated_at.strftime('%d %b %Y %H:%M:%S')

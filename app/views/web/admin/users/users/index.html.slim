@@ -11,6 +11,8 @@ table
       th= sort_link(@search_query, :email)
       th Admin
       th Bulletins
+      th= sort_link(@search_query, :created_at, 'Created at')
+      th= sort_link(@search_query, :updated_at, 'Updated at')
   tbody
     - @users.each do |user|
       == render 'users', user:

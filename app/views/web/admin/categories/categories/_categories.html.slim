@@ -2,6 +2,12 @@ tr
   td
     = category.name
   td
+    =< category.created_at.strftime('%d %b %Y %H:%M:%S')
+  td
+    =< category.updated_at.strftime('%d %b %Y %H:%M:%S')
+  td
+    =< link_to 'Show', admin_category_path(category)
+  td
     =< link_to 'Edit', edit_admin_category_path(category)
   td
     =< link_to 'Destroy', admin_category_path(category), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

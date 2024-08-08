@@ -4,6 +4,7 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   include Pagy::Backend
 
   def index
+    @bulletins_count = Bulletin.all.size
     @search_query = set_bulletins
     @pagy, @bulletins = pagy(@search_query.result
                                           .order(created_at: :desc)
