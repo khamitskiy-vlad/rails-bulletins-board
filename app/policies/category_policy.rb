@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class BulletinPolicy < ApplicationPolicy
-  attr_reader :user, :bulletin
+class CategoryPolicy < ApplicationPolicy
+  attr_reader :user, :category
 
-  def initialize(user, bulletin)
+  def initialize(user, category)
     @user = user
-    @bulletin = bulletin
+    @category = category
   end
 
   def index?
-    true
+    admin?
   end
 
   def show?
@@ -17,7 +17,7 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    admin?
   end
 
   def new?
@@ -25,7 +25,7 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def update?
-    creator
+    admin?
   end
 
   def edit?
@@ -33,12 +33,12 @@ class BulletinPolicy < ApplicationPolicy
   end
 
   def destroy?
-    creator
+    admin?
   end
 
   private
 
-  def creator
-    bulletin.creator == user
+  def admin?
+    @user&.admin?
   end
 end
