@@ -1,0 +1,8 @@
+h1 New category
+
+== render 'form', category: @category, url: admin_categories_path(@category), method: :post
+
+br
+
+div
+  = link_to 'Back to categories', admin_categories_path

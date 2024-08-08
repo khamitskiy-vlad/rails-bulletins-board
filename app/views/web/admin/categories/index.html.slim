@@ -1,0 +1,14 @@
+p style='color: green' = notice
+
+h1 Categories
+= render 'search', search_query: @search_query, url: admin_categories_path
+= link_to 'New Category', new_admin_category_path
+
+table
+  thead
+    tr
+      th= sort_link(@search_query, :name)
+  tbody
+    - @categories.each do |category|
+      == render 'category', category:
+== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

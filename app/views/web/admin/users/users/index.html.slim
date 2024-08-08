@@ -1,0 +1,17 @@
+p style='color: green' = notice
+
+h1 Users administration
+= render 'search', search_query: @search_query, url: admin_users_path
+= link_to 'New user', new_admin_user_path
+table
+  thead
+    tr
+      th= sort_link(@search_query, :id)
+      th= sort_link(@search_query, :name)
+      th= sort_link(@search_query, :email)
+      th Admin
+      th Bulletins
+  tbody
+    - @users.each do |user|
+      == render 'users', user:
+== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

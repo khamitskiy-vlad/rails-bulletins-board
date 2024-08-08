@@ -1,0 +1,19 @@
+tr
+  td
+    = bulletin.id
+  td
+    =< link_to bulletin.title, admin_bulletin_path(bulletin)
+  td
+    =< link_to bulletin.creator.name, admin_user_path(bulletin.creator)
+  td
+    =< bulletin.category.name
+  td
+    =< bulletin.created_at.strftime('%d %b %Y %H:%M:%S')
+  td
+    =< bulletin.updated_at.strftime('%d %b %Y %H:%M:%S')
+  td
+    =< link_to 'Show', admin_bulletin_path(bulletin)
+  td
+    =< link_to 'Edit', edit_admin_bulletin_path(bulletin)
+  td
+    =< link_to 'Destroy', admin_bulletin_path(bulletin), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

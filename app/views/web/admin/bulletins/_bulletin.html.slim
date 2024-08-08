@@ -1,0 +1,13 @@
+div id="#{dom_id bulletin}"
+  p
+    strong Title:
+    =< bulletin.title
+  p
+    strong Description:
+    =< bulletin.description
+  p
+    strong Creator:
+    =< link_to bulletin.creator.name, admin_user_path(bulletin.creator)
+  p
+    strong Category:
+    =< bulletin.category.name

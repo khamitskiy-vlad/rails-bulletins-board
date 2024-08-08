@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @bulletin
+
+div
+  => link_to "Edit this bulletin", edit_admin_bulletin_path(@bulletin)
+  '|
+  =< link_to "Back to bulletins", admin_bulletins_path
+
+  = button_to "Destroy this bulletin", admin_bulletin_path(@bulletin), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

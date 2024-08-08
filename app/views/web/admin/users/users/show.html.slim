@@ -1,0 +1,15 @@
+p style='color: green' = notice
+
+== render @user
+
+div
+  => link_to 'Edit this user', edit_admin_user_path(@user)
+  '|
+  =< link_to 'Back to users', admin_users_path
+
+  = link_to 'Destroy this user', admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+
+h2
+  | Bulletins count:
+  =< @bulletins.count
+= link_to 'User bulletins', admin_user_bulletins_path(@user)

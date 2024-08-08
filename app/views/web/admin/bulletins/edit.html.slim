@@ -1,0 +1,10 @@
+h1 Editing bulletin
+
+== render "form", bulletin: @bulletin, url: admin_bulletin_path(@bulletin), method: :patch
+
+br
+
+div
+  => link_to "Show this bulletin", admin_bulletin_path(@bulletin)
+  '|
+  =< link_to "Back to bulletins", admin_bulletins_path

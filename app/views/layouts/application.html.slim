@@ -19,7 +19,7 @@ html
       #navbarSupportedContent.collapse.navbar-collapse
 
       ul.navbar-nav.ms-auto.mb-2.mb-lg-0
-        - if current_user&.admin?
+        - if policy(:dashboard).index?
           li.nav-link.active
             = link_to 'Dashboard', admin_root_path
         - if current_user

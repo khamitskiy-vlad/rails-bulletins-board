@@ -1,0 +1,12 @@
+= simple_form_for bulletin, url:, method: do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.association :category, required: true, label: t('.category'), prompt: t('.select_category'), input_html: { class: 'form-control' }
+    = f.association :creator, required: true, label: t('.creator'), prompt: t('.select_creator'), input_html: { class: 'form-control' }
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,23 @@
+p style='color: green' = notice
+
+h1
+  => @user.name
+  | bulletins
+= render 'web/admin/bulletins/search', search_query: @search_query, url: admin_user_bulletins_path
+h2
+  | Bulletins count:
+  =< @bulletins.count
+table
+  thead
+    tr
+      th= sort_link(@search_query, :id)
+      th= sort_link(@search_query, :title)
+      th= sort_link(@search_query, :creator_name, 'Creator')
+      th= sort_link(@search_query, :category_name, 'Category')
+      th= sort_link(@search_query, :created_at, 'Created at')
+      th= sort_link(@search_query, :updated_at, 'Updated at')
+  tbody
+    - @bulletins.each do |bulletin|
+      == render 'web/admin/bulletins/bulletins', bulletin:
+= link_to 'Back to user', admin_user_path(@user)
+== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
