@@ -13,4 +13,12 @@ class User < ApplicationRecord
     user.save
     user
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name email]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[bulletins]
+  end
 end
