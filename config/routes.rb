@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   scope module: :web do
     root 'bulletins#index'
     resources :bulletins
-    resources :users
+    resources :categories, only: :show
+    resources :users, only: [:show, :edit, :update]
   end
 
   scope module: :web do
@@ -18,8 +19,12 @@ Rails.application.routes.draw do
     namespace :admin do
       root 'dashboard#index'
       resources :bulletins
-      resources :categories
-      resources :users
+      resources :categories, except: :show
+      scope module: :users do
+        resources :users do
+          resources :bulletins, only: :index
+        end
+      end
     end
   end
 end
