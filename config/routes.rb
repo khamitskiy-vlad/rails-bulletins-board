@@ -19,12 +19,16 @@ Rails.application.routes.draw do
     namespace :admin do
       root 'dashboard#index'
       resources :bulletins
-      resources :categories, except: :show
+      scope module: :categories do
+        resources :categories do
+          resources :bulletins, only: :index
+        end
+      end
       scope module: :users do
         resources :users do
           resources :bulletins, only: :index
         end
-      end
+      end  
     end
   end
 end
