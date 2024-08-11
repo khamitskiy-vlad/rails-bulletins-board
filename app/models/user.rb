@@ -1,9 +1,23 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :bulletins, foreign_key: 'creator_id', inverse_of: :creator, dependent: :destroy
+  has_secure_password validations: false
+  has_many :bulletins,
+    foreign_key: 'creator_id',
+    inverse_of: :creator,
+    dependent: :destroy
 
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :email,
+    format: { with: URI::MailTo::EMAIL_REGEXP },
+    presence: true,
+    uniqueness: true
+  validates :password,
+    presence: true,
+    length: { minimum: 6 },
+    format: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/,
+    confirmation: true,
+    unless: Proc.new { |user| user.password.blank? }
 
   def self.from_omniauth(omniauth_params)
     omniauth_email = omniauth_params.info.email

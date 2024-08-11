@@ -5,14 +5,16 @@ Rails.application.routes.draw do
     root 'bulletins#index'
     resources :bulletins
     resources :categories, only: :show
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:new, :create, :show, :edit, :update]
   end
 
   scope module: :web do
     post 'auth/:provider', to: 'auth#request', as: :auth_request
-    get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
+    get 'auth/:provider/callback', to: 'auth#callback'
     get 'auth/failure', to: 'auth#failure', as: :failure_auth
-    delete 'sign_out', to: 'auth#destroy', as: :destroy_session
+    resources :sessions, only: [:new, :create] do
+      delete :destroy, on: :collection, as: :destroy
+    end
   end
 
   scope module: :web do

@@ -26,9 +26,11 @@ html
           li.nav-link.active
             = current_user.email
           li.nav-link
-            = link_to 'Logout', destroy_session_path, data: { turbo_method: :delete }
+            = link_to 'Logout', destroy_sessions_path, data: { turbo_method: :delete }
         - else
           li.nav-link.active
-          = button_to 'Sign in with Github', auth_request_path(:github), data: { turbo: false }
+            = link_to 'Sign Up', new_user_path
+          li.nav-link.active
+            = link_to 'Sign In', new_session_path
     .container
       = yield
