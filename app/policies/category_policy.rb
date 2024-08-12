@@ -9,7 +9,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def index?
-    admin?
+    true
   end
 
   def show?
@@ -17,28 +17,22 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def create?
-    admin?
+    false
   end
 
   def new?
-    create?
+    false
   end
 
   def update?
-    admin?
+    false
   end
 
   def edit?
-    update?
+    false
   end
 
   def destroy?
-    admin?
-  end
-
-  private
-
-  def admin?
-    @user&.admin?
+    false
   end
 end
