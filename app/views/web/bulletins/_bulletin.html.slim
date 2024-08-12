@@ -9,7 +9,7 @@ div id='#{dom_id bulletin}'
     =< bulletin.description
   p
     strong User:
-    =< bulletin.creator.name
+    =< link_to bulletin.creator.name, 
   p
     strong Category:
     =< bulletin.category.name
