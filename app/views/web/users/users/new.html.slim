@@ -1,0 +1,5 @@
+h1
+  | Sign up
+= render 'form', user: @user
+
+= button_to 'Sign in with Github', auth_request_path(:github), data: { turbo: false }

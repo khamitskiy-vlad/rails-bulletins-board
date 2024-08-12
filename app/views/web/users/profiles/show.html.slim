@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render 'profile', user: @profile
+
+div
+  => link_to "Edit this profile", edit_profile_path(@profile)
+  '|
+  =< link_to "Back to bulletins", root_path
+
+  = button_to "Destroy this profile", profile_path(@profile), method: :delete
