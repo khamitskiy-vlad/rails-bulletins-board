@@ -3,9 +3,19 @@
 Rails.application.routes.draw do
   scope module: :web do
     root 'bulletins#index'
-    resources :bulletins
+    resources :bulletins, only: :show
     resources :categories, only: :show
-    resources :users, only: [:new, :create, :show, :edit, :update]
+    shallow do
+      scope module: :users do
+        resources :users, only: [:new, :create]
+        scope module: :profiles do
+          resources :profiles, only: [:show, :edit, :update, :destroy] do
+            resources :bulletins, only: :create
+          end
+          resources :bulletins, only: [:new, :edit, :update, :destroy]
+        end
+      end
+    end
   end
 
   scope module: :web do
