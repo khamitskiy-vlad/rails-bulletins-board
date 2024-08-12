@@ -5,7 +5,7 @@ class Web::AuthController < Web::ApplicationController
     @user = User.from_omniauth(request.env['omniauth.auth'])
     if @user.persisted?
       session[:user_id] = @user.id
-      redirect_to user_path(@user), notice: "Logged in as #{@user.name}"
+      redirect_to profile_url(@user.profile), notice: "Logged in as #{@user.name}"
     else
       redirect_to root_url, alert: 'Failure'
     end
