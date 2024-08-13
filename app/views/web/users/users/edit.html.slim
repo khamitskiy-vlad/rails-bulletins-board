@@ -1,0 +1,8 @@
+h1 Editing user
+
+== render "form", user: @user, url: user_path(@user), method: :patch
+
+br
+
+div
+  => link_to "Back to user", user_path(@user)

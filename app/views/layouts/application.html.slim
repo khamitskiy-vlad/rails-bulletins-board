@@ -24,7 +24,7 @@ html
             = link_to 'Dashboard', admin_root_path
         - if current_user
           li.nav-link.active
-            = link_to current_user.email, profile_path(current_user)
+            = link_to current_user.email, user_path(current_user)
           li.nav-link
             = link_to 'Logout', destroy_sessions_path, data: { turbo_method: :delete }
         - else

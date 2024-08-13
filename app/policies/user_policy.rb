@@ -1,10 +1,9 @@
-# frozen_string_literal: true
+class UserPolicy < ApplicationPolicy
+  attr_reader :user, :record
 
-class UserPolicy < Struct.new(:user, :user)
-  class Scope
-    def resolve
-      scope
-    end
+  def initialize(user, record)
+    @user = user
+    @record = record
   end
   
   def index?
@@ -16,7 +15,7 @@ class UserPolicy < Struct.new(:user, :user)
   end
 
   def create?
-    false
+    true
   end
 
   def new?
@@ -38,6 +37,6 @@ class UserPolicy < Struct.new(:user, :user)
   private
 
   def owner
-    user.id == user.id
+    user == record
   end
 end

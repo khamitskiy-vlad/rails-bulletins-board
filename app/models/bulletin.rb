@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Bulletin < ApplicationRecord
-  belongs_to :creator, class_name: 'Profile', inverse_of: :bulletins, counter_cache: :bulletins_count
+  belongs_to :creator, class_name: 'User', inverse_of: :bulletins, counter_cache: :bulletins_count
   belongs_to :category, counter_cache: :bulletins_count
   has_many_attached :image
 

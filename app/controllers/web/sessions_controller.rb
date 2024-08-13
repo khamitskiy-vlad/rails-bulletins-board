@@ -8,7 +8,7 @@ class Web::SessionsController < Web::ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to profile_url(@user.profile), notice: "Logged in as #{@user.name}"
+      redirect_to user_url(@user), notice: "Logged in as #{@user.name}"
     else
       redirect_to new_session_path, status: :unprocessable_entity
     end

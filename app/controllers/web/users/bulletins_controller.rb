@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Web::Users::Profiles
-  class BulletinsController < ProfilesController
+module Web::Users
+  class BulletinsController < UsersController
     before_action :authenticate_user!
 
     def new

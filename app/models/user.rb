@@ -2,8 +2,11 @@
 
 class User < ApplicationRecord
   has_secure_password validations: false
-  has_one :profile, dependent: :destroy
-  after_create :build_profile
+  has_one_attached :avatar
+  has_many :bulletins,
+    foreign_key: 'creator_id',
+    inverse_of: :creator,
+    dependent: :destroy
 
   validates :name, presence: true
   validates :email,
@@ -16,11 +19,11 @@ class User < ApplicationRecord
     format: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/,
     confirmation: true,
     unless: Proc.new { |user| user.password.blank? }
+  validates :avatar,
+    attached: false,
+    content_type: %i[png jpg jpeg],
+    size: { less_than: 5.megabytes }
   
-  def build_profile
-    Profile.create(user: self)
-  end
-
   def self.from_omniauth(omniauth_params)
     omniauth_email = omniauth_params.info.email
 

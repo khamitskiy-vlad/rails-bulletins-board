@@ -7,13 +7,10 @@ Rails.application.routes.draw do
     resources :categories, only: :show
     shallow do
       scope module: :users do
-        resources :users, only: [:new, :create]
-        scope module: :profiles do
-          resources :profiles, only: [:show, :edit, :update, :destroy] do
-            resources :bulletins, only: :create
-          end
-          resources :bulletins, only: [:new, :edit, :update, :destroy]
+        resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
+          resources :bulletins, only: :create
         end
+        resources :bulletins, only: [:new, :edit, :update, :destroy]
       end
     end
   end

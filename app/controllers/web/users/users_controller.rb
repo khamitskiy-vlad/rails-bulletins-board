@@ -14,13 +14,49 @@ module Web::Users
       @user = User.new(user_params)
 
       if @user.save
-        redirect_to profile_url(@user.profile), notice: "Logged in as #{@user.name}"
+        redirect_to user_url(@user), notice: "Logged in as #{@user.name}"
       else
         render :new, status: :unprocessable_entity
       end
     end
 
+    def show
+      @user = set_user
+      #authorize @user
+    end
+
+    def edit
+      @user = set_user
+      #authorize @user
+    end
+
+    def update
+      @user = set_user
+      #authorize @user
+
+      if @user.update(user_params)
+        redirect_to user_url(@user), notice: 'user was successfully updated.'
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @user = set_user
+      #authorize @user
+      
+      if @user.destroy!
+        redirect_to root_url, notice: 'user was successfully destroyed.'
+      else
+        redirect_to user_url(@user), notice: 'user was successfully destroyed.'
+      end
+    end
+    
     private
+    
+    def set_user
+      User.find(params[:id])
+    end
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
