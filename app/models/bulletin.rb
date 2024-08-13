@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
 class Bulletin < ApplicationRecord
-  belongs_to :creator, class_name: 'User', inverse_of: :bulletins, counter_cache: :bulletins_count
-  belongs_to :category, counter_cache: :bulletins_count
   has_many_attached :image
+  belongs_to :category, counter_cache: :bulletins_count
+  belongs_to :creator,
+    class_name: 'User',
+    inverse_of: :bulletins,
+    counter_cache: :bulletins_count
 
-  validates :title, presence: true, length: { maximum: 50 }
-  validates :description, presence: true, length: { maximum: 1000 }
-  validates :image, attached: false,
-                    content_type: %i[png jpg jpeg],
-                    size: { less_than: 5.megabytes }
+  validates :title,
+    presence: true,
+    length: { maximum: 50 }
+  validates :description,
+    presence: true,
+    length: { maximum: 1000 }
+  validates :image,
+    attached: false,
+    content_type: %i[png jpg jpeg],
+    size: { less_than: 5.megabytes }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title description]
