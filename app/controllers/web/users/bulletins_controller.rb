@@ -52,11 +52,11 @@ module Web::Users
     private
 
     def bulletin_params
-      params.require(:bulletin).permit(:title, :description, :category_id, images: [])
+      params.require(:bulletin).permit(:title, :description, :category_id, :creator_id, images: [])
     end
 
     def set_bulletin
-      Bulletin.find(params[:id])
+      current_user.bulletins.find(params[:id])
     end
 
     def user_verified?
