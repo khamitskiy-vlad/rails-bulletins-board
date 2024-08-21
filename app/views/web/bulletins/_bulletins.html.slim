@@ -1,7 +1,6 @@
-div id='#{dom_id bulletin}'
+div id='#{dom_id bulletins}'
   - if bulletin.images.attached?
-    - bulletin.images.each do |image|
-      =< image_tag(rails_blob_path(image), size: 200, class: 'img-thumbnail')
+    =< image_tag(rails_blob_path(bulletin.image.first), size: 200, class: 'img-thumbnail')
   p
     strong Title:
     =< bulletin.title

@@ -7,7 +7,7 @@ h1 Bulletins
 #bulletins
   - @bulletins.each do |bulletin|
     .container.rounded-3.mb-3.px-3.py-2.text-break.bg-white
-      == render bulletin
+      == render 'bulletins'
       p
         = link_to 'Show this bulletin', bulletin
 
