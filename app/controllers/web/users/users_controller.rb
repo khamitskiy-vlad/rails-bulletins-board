@@ -20,6 +20,11 @@ module Web::Users
       end
     end
 
+    def profile
+      @user = set_user
+      #authorize @user
+    end
+
     def show
       @user = set_user
       #authorize @user

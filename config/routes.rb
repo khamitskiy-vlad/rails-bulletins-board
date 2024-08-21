@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       scope module: :users do
         resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
           resources :bulletins, only: :create
+          get 'profile', on: :member
         end
         resources :bulletins, only: [:new, :edit, :update, :destroy]
       end
