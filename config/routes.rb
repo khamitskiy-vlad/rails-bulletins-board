@@ -28,7 +28,14 @@ Rails.application.routes.draw do
   scope module: :web do
     namespace :admin do
       root 'dashboard#index'
-      resources :bulletins
+      resources :bulletins do
+        member do
+          patch :moderation
+          patch :publish
+          patch :to_correction
+          patch :archive
+        end
+      end
       scope module: :categories do
         resources :categories do
           resources :bulletins, only: :index
