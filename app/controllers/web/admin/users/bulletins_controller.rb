@@ -10,6 +10,6 @@ class Web::Admin::Users::BulletinsController < Web::Admin::Users::UsersControlle
     @pagy, @bulletins = pagy(@search_query.result
                                           .order(created_at: :desc)
                                           .includes(:creator, :category),
-                                          items: 20)
+                             items: 20)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::SessionsController < Web::ApplicationController
   def new
     redirect_to root_path, notice: 'You Already Signed' if user_signed_in?
@@ -6,7 +8,7 @@ class Web::SessionsController < Web::ApplicationController
   def create
     @user = User.find_by(email: params[:email])
 
-    if @user && @user.authenticate(params[:password])
+    if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to user_url(@user), notice: "Logged in as #{@user.name}"
     else

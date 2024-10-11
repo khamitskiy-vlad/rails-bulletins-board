@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 20.times do |i|
-  i += 1 
+  i += 1
   Bulletin.create!(
     title: "asdasfasfasfasf#{i}",
     description: 'afsdfsdfsdgsdgsdgsdgsdgsdgsdgsdgsdg',

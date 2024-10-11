@@ -4,26 +4,26 @@ class User < ApplicationRecord
   has_secure_password validations: false
   has_one_attached :avatar
   has_many :bulletins,
-    foreign_key: 'creator_id',
-    inverse_of: :creator,
-    dependent: :destroy
+           foreign_key: 'creator_id',
+           inverse_of: :creator,
+           dependent: :destroy
 
   validates :name, presence: true
   validates :email,
-    format: { with: URI::MailTo::EMAIL_REGEXP },
-    presence: true,
-    uniqueness: true
+            format: { with: URI::MailTo::EMAIL_REGEXP },
+            presence: true,
+            uniqueness: true
   validates :password,
-    presence: true,
-    length: { minimum: 6 },
-    format: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/,
-    confirmation: true,
-    unless: Proc.new { |user| user.password.blank? }
+            presence: true,
+            length: { minimum: 6 },
+            format: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/,
+            confirmation: true,
+            unless: proc { |user| user.password.blank? }
   validates :avatar,
-    attached: false,
-    content_type: %i[png jpg jpeg],
-    size: { less_than: 5.megabytes }
-  
+            attached: false,
+            content_type: %i[png jpg jpeg],
+            size: { less_than: 5.megabytes }
+
   def self.from_omniauth(omniauth_params)
     omniauth_email = omniauth_params.info.email
 

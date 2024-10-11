@@ -7,7 +7,7 @@ class Web::Admin::Users::UsersController < Web::Admin::Users::ApplicationControl
     @search_query = set_users
     @pagy, @users = pagy(@search_query.result
                                       .includes(:bulletins),
-                                      items: 20)
+                         items: 20)
   end
 
   def show
@@ -45,7 +45,7 @@ class Web::Admin::Users::UsersController < Web::Admin::Users::ApplicationControl
 
   def destroy
     @user = set_user
-    
+
     if @user.destroy!
       redirect_to admin_users_url, notice: 'User was successfully destroyed.'
     else

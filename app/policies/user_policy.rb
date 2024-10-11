@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   attr_reader :user, :record
 
@@ -5,7 +7,7 @@ class UserPolicy < ApplicationPolicy
     @user = user
     @record = record
   end
-  
+
   def index?
     false
   end

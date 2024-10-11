@@ -2,12 +2,22 @@
 
 module Web::Users
   class UsersController < ApplicationController
+    def show
+      @user = set_user
+      # authorize @user
+    end
+
     def new
       if user_signed_in?
-        redirect_to root_path, notice: 'You Already Signed' 
+        redirect_to root_path, notice: 'You Already Signed'
       else
         @user = User.new
       end
+    end
+
+    def edit
+      @user = set_user
+      # authorize @user
     end
 
     def create
@@ -22,22 +32,12 @@ module Web::Users
 
     def profile
       @user = set_user
-      #authorize @user
-    end
-
-    def show
-      @user = set_user
-      #authorize @user
-    end
-
-    def edit
-      @user = set_user
-      #authorize @user
+      # authorize @user
     end
 
     def update
       @user = set_user
-      #authorize @user
+      # authorize @user
 
       if @user.update(user_params)
         redirect_to user_url(@user), notice: 'user was successfully updated.'
@@ -48,17 +48,17 @@ module Web::Users
 
     def destroy
       @user = set_user
-      #authorize @user
-      
+      # authorize @user
+
       if @user.destroy!
         redirect_to root_url, notice: 'user was successfully destroyed.'
       else
         redirect_to user_url(@user), notice: 'user was successfully destroyed.'
       end
     end
-    
+
     private
-    
+
     def set_user
       User.find(params[:id])
     end

@@ -3,14 +3,14 @@
 class Web::Admin::Categories::CategoriesController < Web::Admin::Categories::ApplicationController
   include Pagy::Backend
 
-  def show
-    @category = set_category
-    @bulletins = @category.bulletins.includes(:creator, :category)
-  end
-
   def index
     @search_query = set_categories
     @pagy, @categories = pagy(@search_query.result.order(created_at: :desc), items: 20)
+  end
+
+  def show
+    @category = set_category
+    @bulletins = @category.bulletins.includes(:creator, :category)
   end
 
   def new

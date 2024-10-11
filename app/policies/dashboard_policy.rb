@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardPolicy < Struct.new(:user, :dashboard)
   class Scope
     def resolve
@@ -8,4 +10,4 @@ class DashboardPolicy < Struct.new(:user, :dashboard)
   def index?
     user&.admin?
   end
-end  
+end

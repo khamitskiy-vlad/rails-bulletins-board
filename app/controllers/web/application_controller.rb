@@ -2,7 +2,7 @@
 
 class Web::ApplicationController < ApplicationController
   include Pundit::Authorization
-  
+
   after_action :verify_authorized
   protect_from_forgery with: :exception
   helper_method :current_user
