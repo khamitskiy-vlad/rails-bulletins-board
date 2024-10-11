@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.2'
 
+gem 'aasm'
 gem 'active_storage_validations'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'bootsnap', require: false
@@ -14,10 +15,11 @@ gem 'cssbundling-rails'
 gem 'image_processing'
 gem 'jbuilder'
 gem 'jsbundling-rails'
+gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'pagy', '~> 8.6'
-gem 'puma', '>= 5.0'
+gem 'puma', '>= 6.4.3'
 gem 'pundit'
 gem 'rails', '~> 7.1', '>= 7.1.3.4'
 gem 'rails-i18n'
@@ -32,6 +34,7 @@ gem 'stackprof'
 gem 'stimulus-rails'
 gem 'turbo-rails', '~> 1.0.0'
 gem 'tzinfo-data', platforms: %i[windows jruby]
+gem 'webrick', '~> 1.8', '>= 1.8.2'
 
 group :production do
   gem 'pg', '~> 1.4'
