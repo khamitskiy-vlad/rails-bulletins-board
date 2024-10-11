@@ -54,6 +54,46 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
     end
   end
 
+  def to_moderation
+    @bulletin = set_bulletin
+
+    if @bulletin.to_moderation!
+      redirect_to admin_bulletins_url, notice: 'Bulletin was sent to moderation.'
+    else
+      redirect_to admin_bulletin_url(@bulletin), notice: 'Failed to send to moderation.'
+    end
+  end
+
+  def publish
+    @bulletin = set_bulletin
+
+    if @bulletin.publish!
+      redirect_to admin_bulletins_url, notice: 'Bulletin was published.'
+    else
+      redirect_to admin_bulletin_url(@bulletin), notice: 'Failed to publish bulletin.'
+    end
+  end
+
+  def to_correction
+    @bulletin = set_bulletin
+
+    if @bulletin.to_correction!
+      redirect_to admin_bulletins_url, notice: 'Bulletin was sent for correction.'
+    else
+      redirect_to admin_bulletin_url(@bulletin), notice: 'Failed to send for correction.'
+    end
+  end
+
+  def archive
+    @bulletin = set_bulletin
+
+    if @bulletin.archive!
+      redirect_to admin_bulletins_url, notice: 'Bulletin was archived.'
+    else
+      redirect_to admin_bulletin_url(@bulletin), notice: 'Failed to archive bulletin.'
+    end
+  end
+
   private
 
   def bulletin_params
